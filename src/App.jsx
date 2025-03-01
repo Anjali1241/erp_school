@@ -6,7 +6,10 @@ import Signup from "./pages/Signup";
 const App = () => {
   return (
     <Provider store={store}>
-      <Signup />
+      <div className="container">
+
+        <Signup />
+      </div>
     </Provider>
   );
 };

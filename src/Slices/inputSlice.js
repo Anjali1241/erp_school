@@ -23,9 +23,11 @@ const inputSlice = createSlice({
       if (state.inputs[id].required && state.inputs[id].value.trim() === "") {
         state.inputs[id].valid = false;
         state.inputs[id].errorMessage = "This field is required";
+        state.inputs[id].uiClass = "form-control is-invalid";
       } else {
         state.inputs[id].valid = true;
         state.inputs[id].errorMessage = "";
+        state.inputs[id].uiClass = "form-control is-valid";
       }
     },
     reset: (state, action) => {

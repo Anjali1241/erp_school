@@ -27,26 +27,32 @@ const Signup = () => {
       {/* Signup */}
       <h2>Signup</h2>
 
-      {firstnameVisible && (
-        <>
-          <InputText id="firstname" qtext="First name" help="" hint="" required={true} />
-          <br/>
-        </>
-      )}
+      <div className="row">
+      <div className="col-12">
 
-      {lastnameVisible && (
-        <>
-          <InputText id="lastname" qtext="Last name" help="" hint="" required={true} />
-          <br/>
-        </>
-      )}
+        {firstnameVisible && (
+          <>
+            <InputText id="firstname" qtext="First name" help="" hint="" required={true} />
+            <br/>
+          </>
+        )}
 
-      {emailVisible && (
-        <>
-          <InputText id="email" qtext="Email ID" help="" hint="" required={false} />
-          <br/>
-        </>
-      )}
+        {lastnameVisible && (
+          <>
+            <InputText id="lastname" qtext="Last name" help="" hint="" required={true} />
+            <br/>
+          </>
+        )}
+
+        {emailVisible && (
+          <>
+            <InputText id="email" qtext="Email ID" help="" hint="" required={false} />
+            <br/>
+          </>
+        )}
+
+      </div>
+      </div>
     </div>
   );
 };

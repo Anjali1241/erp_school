@@ -29,12 +29,12 @@ const InputText = ({ id, qtext, help, hint, required = false }) => {
 
   return (
     <div>
-      <label className="form-label">{qtext}</label> <br />
+      <label className="form-label fs-5">{qtext}</label> <br />
       {help ? <div className="fw-bold small">{help}</div> : ""}
-      <input type="text" value={memoizedInputState.value || ""} onChange={handleChange} onBlur={handleBlur} />
+      <input type="text" className={memoizedInputState.uiClass || "form-control"} value={memoizedInputState.value || ""} onChange={handleChange} onBlur={handleBlur} />
       {hint ? <div><small className="text-primary fst-italic">{hint}</small></div> : ""}
       {memoizedInputState.valid === false && memoizedInputState.required && (
-        <div><small style={{ color: "red" }}>{memoizedInputState.errorMessage}</small></div>
+        <div><small className="text-danger">{memoizedInputState.errorMessage}</small></div>
       )}
     </div>
   );
