@@ -51,9 +51,37 @@ const inputSlice = createSlice({
       } else {
         state.inputs[id].required = required;
       }
+    },
+    validateAllVisibleFields: (state) => {
+      let isPageValid = true;
+    
+      Object.keys(state.inputs).forEach((id) => {
+        const input = state.inputs[id];
+    
+        if (input.visible) {
+          // Validate the field
+          if (input.required && input.value.trim() === "") {
+            input.valid = false;
+            input.errorMessage = "This field is required";
+            input.uiClass = "form-control is-invalid";
+            isPageValid = false;
+          } else {
+            input.valid = true;
+            input.errorMessage = "";
+            input.uiClass = "form-control is-valid";
+          }
+        }
+      });
+    
+      state.pageValid = isPageValid;
+    },      
+    resetAllFields: (state) => {      
+        Object.keys(state.inputs).forEach((id) => {
+          state.inputs[id] = { value: "", valid: null, errorMessage: "", visible: true, required: false };
+        });
     }
   },
 });
 
-export const { setValue, validate, reset, setVisibility, setRequired } = inputSlice.actions;
+export const { setValue, validate, reset, setVisibility, setRequired, validateAllVisibleFields, resetAllFields } = inputSlice.actions;
 export default inputSlice.reducer;
