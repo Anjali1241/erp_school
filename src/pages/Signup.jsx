@@ -59,12 +59,12 @@ const Signup = () => {
       <h2>Signup : {submitted ? (pageValid ? 'valid' : 'invalid') : ''}</h2>
       <div className="row">
         <div className="col-12">
-          {firstnameVisible && <InputText id="firstname" qtext="First name" required={true} />}
-          {lastnameVisible && <InputText id="lastname" qtext="Last name" required={true} />}
-          {emailVisible && <InputText id="email" qtext="Email ID" required={false} />}
+          {firstnameVisible && <InputText id="firstname" label="First name" required={false} />}
+          {lastnameVisible && <InputText id="lastname" label="Last name" required={true} />}
+          {emailVisible && <InputText id="email" label="Email ID" required={false} />}
           
-          <InputNumber id="age" qtext="Age" help="Enter your age" required={true} min={18} max={40} />
-          <InputNumber id="enroll" qtext="Enroll Number" required={true} min={100} max={999} />
+          <InputNumber id="age" label="Age"  required={true} min={18} max={40} />
+          <InputNumber id="enroll" label="Enroll Number" required={true} min={100} max={999} />
 
           <button className="btn btn-primary mt-2 me-2" onClick={handleValidatePage}>
             Submit

@@ -2,7 +2,7 @@ import React, { useEffect, useMemo } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { setValue, validate, reset, setRequired } from "../Slices/inputSlice";
 
-const InputText = ({ id, qtext, help, hint, required = false }) => {
+const InputText = ({ id, label, help, hint, required = false }) => {
   const dispatch = useDispatch();
 
   // Initialize required attribute in Redux store
@@ -29,7 +29,7 @@ const InputText = ({ id, qtext, help, hint, required = false }) => {
 
   return (
     <div>
-      <label className="form-label fs-5">{qtext}</label> <br />
+      <label className="form-label fs-5">{label}</label> <br />
       {help ? <div className="fw-bold small">{help}</div> : ""}
       <input type="text" className={memoizedInputState.uiClass || "form-control"} value={memoizedInputState.value || ""} onChange={handleChange} onBlur={handleBlur} />
       {hint ? <div><small className="text-primary fst-italic">{hint}</small></div> : ""}

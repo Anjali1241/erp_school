@@ -2,7 +2,7 @@ import React, { useEffect, useMemo } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { setNumberValue, validateNumber, resetNumber, setNumberRequired, setNumberRange } from "../Slices/numberInputSlice";
 
-const InputNumber = ({ id, qtext, help, hint, required = false, min, max }) => {
+const InputNumber = ({ id, label, help, hint, required = false, min, max }) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -23,7 +23,7 @@ const InputNumber = ({ id, qtext, help, hint, required = false, min, max }) => {
 
   return (
     <div>
-      <label className="form-label fs-5">{qtext}</label> <br />
+      <label className="form-label fs-5">{label}</label> <br />
       {help && <div className="fw-bold small">{help}</div>}
       <input
         type="number"
