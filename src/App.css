@@ -40,3 +40,15 @@
 .read-the-docs {
   color: #888;
 }
+
+.default {
+  border: 1px solid #ccc;
+}
+
+.valid {
+  border: 2px solid green;
+}
+
+.error {
+  border: 2px solid red;
+}
