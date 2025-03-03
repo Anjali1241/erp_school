@@ -24,8 +24,11 @@ jobs:
       - name: Build React App
         run: |
           npm run build
-          ls -la ./build || echo "❌ Build directory not found!" && exit 1
-
+          if [ ! -d "./build" ]; then
+            echo "❌ Build directory not found! Failing the workflow."
+            exit 1
+          fi
+          
       - name: Deploy via FTP
         uses: SamKirkland/FTP-Deploy-Action@v4.3.4
         with:
