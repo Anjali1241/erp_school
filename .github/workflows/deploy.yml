@@ -28,9 +28,13 @@ jobs:
       - name: Build React app
         run: npm run build
 
-      # Deploy to InfinityFree via FTP (using correct version)
+      # ✅ Debug: Check if ./build exists
+      - name: Debug - List files
+        run: ls -la
+
+      # Deploy to InfinityFree via FTP
       - name: Deploy to InfinityFree
-        uses: SamKirkland/FTP-Deploy-Action@v4.3.4  # ✅ Use latest stable version
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.4
         with:
           server: ${{ secrets.FTP_HOST }}
           username: ${{ secrets.FTP_USERNAME }}
