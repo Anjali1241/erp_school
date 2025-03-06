@@ -10,30 +10,30 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # Checkout the code from the repository
+      # Checkout the repository
       - name: Checkout repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
-      # Set up Node.js
+      # Set up Node.js (must be 18 or later)
       - name: Set up Node.js
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v3
         with:
-          node-version: '16'  # Use the version you need
+          node-version: '18'  # Fixes crypto.getRandomValues error
 
       # Install dependencies
       - name: Install dependencies
         run: npm install
 
-      # Build the React app (outputs to the 'build/' folder)
+      # Build the React app with Web Crypto API fix
       - name: Build React app
-        run: npm run build
+        run: NODE_OPTIONS="--experimental-global-webcrypto" npm run build
 
       # Deploy to InfinityFree via FTP
       - name: Deploy to InfinityFree
-        uses: SamKirkland/FTP-Deploy-Action@v4.0.0  # Use version v4.0.0 explicitly
+        uses: SamKirkland/FTP-Deploy-Action@v4
         with:
           server: ${{ secrets.FTP_HOST }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
-          local-dir: ./build/  # Make sure to include the trailing slash
-          server-dir: /htdocs/  # InfinityFree server directory (ensure the trailing slash)
+          local-dir: ./build/  # Ensure trailing slash
+          server-dir: /htdocs/  # Ensure correct InfinityFree directory
