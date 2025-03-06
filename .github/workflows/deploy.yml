@@ -1,39 +1,39 @@
-name: Deploy React App to cPanel FTP
+name: Build and Deploy React App
 
 on:
   push:
     branches:
-      - main
+      - main  # Trigger on 'main' branch
 
 jobs:
-  build-and-deploy:
+  build:
     runs-on: ubuntu-latest
-    
+
     steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v3
+      # Checkout the code from the repository
+      - name: Checkout repository
+        uses: actions/checkout@v2
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v3
+      # Set up Node.js
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
         with:
-          node-version: 18
+          node-version: '16'  # Use the version you need
 
-      - name: Install Dependencies
+      # Install dependencies
+      - name: Install dependencies
         run: npm install
 
-      - name: Build React App
-        run: |
-          npm run build
-          if [ ! -d "./build" ]; then
-            echo "❌ Build directory not found! Failing the workflow."
-            exit 1
-          fi
-          
-      - name: Deploy via FTP
-        uses: SamKirkland/FTP-Deploy-Action@v4.3.4
+      # Build the React app (outputs to the 'build/' folder)
+      - name: Build React app
+        run: npm run build
+
+      # Deploy to InfinityFree via FTP
+      - name: Deploy to InfinityFree
+        uses: SamKirkland/FTP-Deploy-Action@v4.0.0  # Use version v4.0.0 explicitly
         with:
-          server: ${{ secrets.FTP_HOST }}
+          server: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
-          local-dir: "./build/"
-          server-dir: "${{ secrets.FTP_DIR }}/"
+          local-dir: ./build/  # Make sure to include the trailing slash
+          server-dir: /htdocs/  # InfinityFree server directory (ensure the trailing slash)

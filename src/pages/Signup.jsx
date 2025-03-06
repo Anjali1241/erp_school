@@ -59,7 +59,7 @@ const Signup = () => {
       <h2>Signup : {submitted ? (pageValid ? 'valid' : 'invalid') : ''}</h2>
       <div className="row">
         <div className="col-12">
-          {firstnameVisible && <InputText id="firstname" label="First name" required={false} />}
+          {firstnameVisible && <InputText id="firstname" label="First name" required={true} />}
           {lastnameVisible && <InputText id="lastname" label="Last name" required={true} />}
           {emailVisible && <InputText id="email" label="Email ID" required={false} />}
           
