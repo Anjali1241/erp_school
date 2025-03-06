@@ -14,23 +14,23 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      # Set up Node.js (must be 18 or later)
+      # Set up Node.js (use Node.js 18 to fix crypto.getRandomValues error)
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '18'  # Fixes crypto.getRandomValues error
+          node-version: '18'
 
       # Install dependencies
       - name: Install dependencies
         run: npm install
 
-      # Build the React app with Web Crypto API fix
+      # Build the React app
       - name: Build React app
-        run: NODE_OPTIONS="--experimental-global-webcrypto" npm run build
+        run: npm run build
 
-      # Deploy to InfinityFree via FTP
+      # Deploy to InfinityFree via FTP (using correct version)
       - name: Deploy to InfinityFree
-        uses: SamKirkland/FTP-Deploy-Action@v4
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.4  # ✅ Use latest stable version
         with:
           server: ${{ secrets.FTP_HOST }}
           username: ${{ secrets.FTP_USERNAME }}
