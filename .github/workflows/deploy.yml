@@ -32,7 +32,7 @@ jobs:
       - name: Deploy to InfinityFree
         uses: SamKirkland/FTP-Deploy-Action@v4.0.0  # Use version v4.0.0 explicitly
         with:
-          server: ${{ secrets.FTP_SERVER }}
+          server: ${{ secrets.FTP_HOST }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
           local-dir: ./build/  # Make sure to include the trailing slash
